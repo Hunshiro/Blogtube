@@ -7,8 +7,8 @@ const Footer = () => {
         <footer>
             <div className="developedby">
 
-              <a href="https://github.com/ojasaklechayt">
-              Developed in by<span className='colorchange'>❤️Prabhanshu Tiwari</span></a>
+              <a href="https://github.com/Hunshiro">
+              Developed  by<span className='colorchange'>❤️Prabhanshu Tiwari</span></a>
 
 
             </div>
