@@ -11,7 +11,7 @@ const app = express();
 
 // Enable cors middleware
 app.use(cors({
-  origin: 'https://oju-blogs.vercel.app', // Update with your frontend URL
+  origin: 'https://blogtube-luoc.vercel.app/', // Update with your frontend URL
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true, // Include if you need to handle cookies
 }));
@@ -21,7 +21,7 @@ app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
 
 mongoose
-  .connect("mongodb+srv://blogadmin:blogadmin@cluster0.qgghli6.mongodb.net/Blog?retryWrites=true&w=majority", { // Use the MONGODB_URI from your .env file
+  .connect(' mongodb+srv://prabhanshut67:Prajx%402029%404004alphA@cluster0.qwledcu.mongodb.net/', { // Use the MONGODB_URI from your .env file
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
