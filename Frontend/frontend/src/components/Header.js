@@ -28,7 +28,7 @@ const Header = () => {
     >
       <Toolbar>
         <Typography sx={{fontFamily:"monospace"}} variant="h5">
-          Oju's Blogs
+          BlogTube
         </Typography>
         {isLoggedIn && (
           <Box display="flex" marginLeft={"auto"} marginRight="auto">

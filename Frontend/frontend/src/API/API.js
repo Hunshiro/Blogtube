@@ -1,8 +1,6 @@
 import axios from "axios";
 const API = axios.create({
-    baseURL:
-        "https://oju-blog-backend.onrender.com"// Update with your Backend URL
-    ,
+    baseURL: process.env.REACT_APP_API_URL,
 });
 
 
