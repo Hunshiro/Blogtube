@@ -1,39 +1,56 @@
-import express from "express";
-import mongoose from "mongoose";
-import blogRouter from "./routes/blog-routes.js";
-import router from "./routes/user-routes.js";
-import cors from "cors";
-import dotenv from "dotenv";
+import express from 'express';
+import mongoose from 'mongoose';
+import path from 'path';
+import blogRouter from './routes/blog-routes.js';
+import router from './routes/user-routes.js';
+import cors from 'cors';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
 const app = express();
 
-// Enable cors middleware
+const allowedOrigins = ['http://localhost:5000', 'https://blogtube-luoc.vercel.app/'];
+
 app.use(cors({
-  origin: 'https://blogtube-luoc.vercel.app/', // Update with your frontend URL
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Include if you need to handle cookies
+  credentials: true,
 }));
 
 app.use(express.json({ limit: "1000kb" }));
 app.use("/api/user", router);
 app.use("/api/blog", blogRouter);
 
-mongoose
-  .connect(' mongodb+srv://prabhanshut67:Prajx%402029%404004alphA@cluster0.qwledcu.mongodb.net/', { // Use the MONGODB_URI from your .env file
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+// Serve static files from the React app
+const __dirname = path.resolve();
+app.use(express.static(path.join(__dirname, 'build')));
+
+mongoose.connect(process.env.MONGO_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
   .then(() => {
-    app.listen(5000, () => {
-      console.log("Connected to Database and Listening to Localhost 5000");
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, () => {
+      console.log(`Connected to Database and Listening on port ${PORT}`);
     });
   })
   .catch((err) => {
     console.error(err);
     process.exit(1);
   });
+
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 app.use((req, res) => {
   res.status(404).json({
