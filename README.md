@@ -1,12 +1,6 @@
-# Oju's Blogs
-A full MERN Stack Blogging website to write out yourself
+ # Blogtube
+  Blog website where you can create , delete and update blogs
 
-# Some Snaps of website
-
-
-# Tech Stack Used
-Frontend - ReactJS, Material UI, Redux
-
-Backend - NodeJS, ExpressJS, MongoDB
-
-
+  # Tech stack
+  - Node.js , react.js , redux, express.js , MongoDB
+  
